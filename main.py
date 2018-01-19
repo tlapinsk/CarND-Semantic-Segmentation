@@ -4,6 +4,7 @@ import helper
 import warnings
 from distutils.version import LooseVersion
 import project_tests as tests
+import time
 
 
 # Check TensorFlow Version
@@ -137,14 +138,29 @@ def train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_l
     # TODO: Implement function
     sess.run(tf.global_variables_initializer())
     
+    start = time.clock()
+    
     print("Training...")
     print()
     for i in range(epochs):
+        batches = get_batches_fn(batch_size)
+        
         print("EPOCH {} ...".format(i+1))
-        for image, label in get_batches_fn(batch_size):
+        loss_array = []            
+        for image, label in batches:
             _, loss = sess.run([train_op, cross_entropy_loss], 
                                feed_dict={input_image: image, correct_label: label, keep_prob: 0.5, learning_rate: 0.0009})
+            loss_array.append(loss)
             print("Loss: = {:.3f}".format(loss))
+        
+        loss_sum = sum(int(i) for i in loss_array)
+        avg_loss = loss_sum / len(loss_array)
+        
+        end = time.clock()
+        train = (end - start) / 60
+        print()
+        print("Epoch {}".format(i+1), "Results:")
+        print("Epoch: {}/{} | Time: {} mins | Avg Loss: {}".format(i+1, epochs, train, avg_loss))
         print()
 tests.test_train_nn(train_nn)
 
