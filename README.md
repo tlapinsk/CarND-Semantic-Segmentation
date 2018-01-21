@@ -84,12 +84,14 @@ Check out samples below:
 ![Sample 12](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000005.png?raw=true "Sample 12")
 
 ## Resources
-Shoutout to the tutorials provided by Udacity on Path Planning and the Path Planning Walkthrough. The Path Planning Walkthrough was especially helpful to get me started. It didn't take much to complete the project after watching the Walkthrough a few times. Below are resources and helpful links that I used to complete this project:
+Shoutout to the tutorials provided by Udacity on fully convolutional neural networks. The Semantic Segmentation Walkthrough was especially helpful to get me started. It didn't take much to complete the project after watching the Walkthrough a few times. Below are resources and helpful links that I used to complete this project:
 
-- [A Survey of Motion Planning and Control
-Techniques for Self-driving Urban Vehicles](https://arxiv.org/pdf/1604.07446.pdf)
-- [Spline library](http://kluge.in-chemnitz.de/opensource/spline/)
-- [Path Planning Walkthrough](https://www.youtube.com/watch?time_continue=1628&v=7sI3VHFPP0w)
+- [Semantic Segmentation Project Walkthrough](https://youtu.be/5g9sZIwGubk)
+- [AWS AMI setup](https://discussions.udacity.com/t/aws-ami-setup-operation-timed-out-error/349017/12)
+- [Setup and use Jupyter (IPython) Notebooks on AWS](https://towardsdatascience.com/setting-up-and-using-jupyter-notebooks-on-aws-61a9648db6c5)
+- [Update TensorFlow](https://stackoverflow.com/questions/42574476/update-tensorflow)
+- [Elapsed time in Python](https://stackoverflow.com/questions/3620943/measuring-elapsed-time-with-the-time-module)
+- [Round to nearest integer in Python](https://stackoverflow.com/questions/31818050/round-number-to-nearest-integer)
 
 # Semantic Segmentation
 ### Introduction
