@@ -70,7 +70,18 @@ Hyperparameters below:
 ### Results
 Check out samples below:
 
-
+![Sample 1](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000015.png?raw=true "Sample 1")
+![Sample 2](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000008.png?raw=true "Sample 2")
+![Sample 3](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000017.png?raw=true "Sample 3")
+![Sample 4](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/umm_000034.png?raw=true "Sample 4")
+![Sample 5](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/umm_000078.png?raw=true "Sample 5")
+![Sample 6](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/uu_000023.png?raw=true "Sample 6")
+![Sample 7](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/uu_000090.png?raw=true "Sample 7")
+![Sample 8](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/uu_000006.png?raw=true "Sample 8")
+![Sample 9](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000080.png?raw=true "Sample 9")
+![Sample 10](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000063.png?raw=true "Sample 10")
+![Sample 11](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000026.png?raw=true "Sample 11")
+![Sample 12](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000005.png?raw=true "Sample 12")
 
 ## Resources
 Shoutout to the tutorials provided by Udacity on Path Planning and the Path Planning Walkthrough. The Path Planning Walkthrough was especially helpful to get me started. It didn't take much to complete the project after watching the Walkthrough a few times. Below are resources and helpful links that I used to complete this project:
