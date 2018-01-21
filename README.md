@@ -1,4 +1,4 @@
-# Path Planning Project
+# Semantic Segmentation Project
 In this project, I used Python to create an advanced neural network that classified sections of the road with decent reliability.
 
 ## Project Info
