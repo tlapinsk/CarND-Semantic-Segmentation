@@ -2,7 +2,7 @@
 In this project, I used Python to create an advanced neural network that classified sections of the road with decent reliability.
 
 ## Project Info
-To see the implementation please `main.py`
+To see the implementation please go to `main.py` in the CarND-Semantic-Segmentation repository
 
 ## Overview
 The goal of this project was to create a a fully convolutional neural network based on the VGG-16 image classifier architecture to perform semantic segmentation (road versus not road in images).

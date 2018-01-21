@@ -138,7 +138,7 @@ def train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_l
     # TODO: Implement function
     sess.run(tf.global_variables_initializer())
     
-    start = time.clock()
+    start = time.time()
     
     print("Training...")
     print()
@@ -153,14 +153,15 @@ def train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_l
             loss_array.append(loss)
             print("Loss: = {:.3f}".format(loss))
         
-        loss_sum = sum(int(i) for i in loss_array)
+        loss_sum = sum(loss_array)
         avg_loss = loss_sum / len(loss_array)
         
-        end = time.clock()
+        end = time.time()
         train = (end - start) / 60
+        train = int(round(train))
         print()
         print("Epoch {}".format(i+1), "Results:")
-        print("Epoch: {}/{} | Time: {} mins | Avg Loss: {}".format(i+1, epochs, train, avg_loss))
+        print("Epoch: {}/{} | Total Time: {} mins | Avg Loss: {:.2f}".format(i+1, epochs, train, avg_loss))
         print()
 tests.test_train_nn(train_nn)
 
