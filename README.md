@@ -1,3 +1,85 @@
+# Path Planning Project
+In this project, I used Python to create an advanced neural network that classified sections of the road with decent reliability.
+
+## Project Info
+To see the implementation please `main.py`
+
+## Overview
+The goal of this project was to create a a fully convolutional neural network based on the VGG-16 image classifier architecture to perform semantic segmentation (road versus not road in images).
+
+## Architecture
+As recommended, I used a pre-trained VGG-16 network that was converted to a fully convolutional neural network. This was achieved by replacing the final fully connected layer with a 1x1 convolution and setting the depth to the desired number of classes.
+
+The use of skip connections, 1x1 convolutions on prior layers, and finally upsampling (to output the same size image as the input) further helped me achieve great results. Lastly, as recommended, I also implemented a kernal initializer and regularizer. These helped tremendously.
+
+The main section of the code where this was all achieved can be seen below:
+
+```
+# 1x1 convolution of vgg layer 7
+layer7_out = tf.layers.conv2d(vgg_layer7_out, num_classes, 1, padding='same', 
+                            kernel_initializer= tf.random_normal_initializer(stddev=0.01),
+                            kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
+
+# upsample
+layer4a_in = tf.layers.conv2d_transpose(layer7_out, num_classes, 4, strides=(2, 2), padding='same', 
+                            kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
+                            kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
+
+# 1x1 convolution of vgg layer 4
+layer4b_in = tf.layers.conv2d(vgg_layer4_out, num_classes, 1, padding='same', 
+                            kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
+                            kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
+
+# skip connection
+layer4a_out = tf.add(layer4a_in, layer4b_in)
+
+# upsample
+layer3a_in = tf.layers.conv2d_transpose(layer4a_out, num_classes, 4, strides=(2, 2), padding='same', 
+                            kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
+                            kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
+
+# 1x1 convolution of vgg layer 3
+layer3b_in = tf.layers.conv2d(vgg_layer3_out, num_classes, 1, padding='same', 
+                            kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
+                            kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
+
+# skip connection
+layer3a_out = tf.add(layer3a_in, layer3b_in)
+
+# upsample
+nn_last_layer = tf.layers.conv2d_transpose(layer3a_out, num_classes, 16, strides=(8, 8), padding= 'same', 
+                            kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
+                            kernel_regularizer= tf.contrib.layers.l2_regularizer(1e-3))
+```
+
+### Optimizer
+Loss function: cross-entropy
+Optimizer: Adam optimizer
+
+### Training
+Hyperparameters below:
+
+|  Input          |    MSE   |
+|  -----          |  ------- |
+|  keep_prob      |  0.5     |
+|  learning_rate  |  0.0009  |
+|  epochs         |  25      |
+|  batch_size     |  5       |
+
+
+### Results
+Check out samples below:
+
+
+
+## Resources
+Shoutout to the tutorials provided by Udacity on Path Planning and the Path Planning Walkthrough. The Path Planning Walkthrough was especially helpful to get me started. It didn't take much to complete the project after watching the Walkthrough a few times. Below are resources and helpful links that I used to complete this project:
+
+- [A Survey of Motion Planning and Control
+Techniques for Self-driving Urban Vehicles](https://arxiv.org/pdf/1604.07446.pdf)
+- [Spline library](http://kluge.in-chemnitz.de/opensource/spline/)
+- [Path Planning Walkthrough](https://www.youtube.com/watch?time_continue=1628&v=7sI3VHFPP0w)
+
 # Semantic Segmentation
 ### Introduction
 In this project, you'll label the pixels of a road in images using a Fully Convolutional Network (FCN).
