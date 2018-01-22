@@ -1,5 +1,5 @@
 # Semantic Segmentation Project
-In this project, I used Python to create an advanced neural network that classified road versus non-road sections of dataset.
+In this project, I used Python to create an advanced neural network that classified road versus non-road sections of the [Kitti Road dataset](http://www.cvlibs.net/download.php?file=data_road.zip).
 
 ## Project Info
 To see the implementation please go to `main.py` in the CarND-Semantic-Segmentation repository.
