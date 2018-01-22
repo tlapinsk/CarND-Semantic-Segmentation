@@ -1,8 +1,8 @@
 # Semantic Segmentation Project
-In this project, I used Python to create an advanced neural network that classified sections of the road with decent reliability.
+In this project, I used Python to create an advanced neural network that classified road versus non-road sections of dataset.
 
 ## Project Info
-To see the implementation please go to `main.py` in the CarND-Semantic-Segmentation repository
+To see the implementation please go to `main.py` in the CarND-Semantic-Segmentation repository.
 
 ## Overview
 The goal of this project was to create a a fully convolutional neural network based on the VGG-16 image classifier architecture to perform semantic segmentation (road versus not road in images).
@@ -53,7 +53,7 @@ nn_last_layer = tf.layers.conv2d_transpose(layer3a_out, num_classes, 16, strides
 ```
 
 ### Optimizer
-Loss function: cross-entropy
+Loss function: Cross-entropy
 Optimizer: Adam optimizer
 
 ### Training
