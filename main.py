@@ -57,38 +57,38 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
     """
     # TODO: Implement function
     # 1x1 convolution of vgg layer 7
-    layer7_out = tf.layers.conv2d(vgg_layer7_out, num_classes, 1, padding='same', 
+    layer_7 = tf.layers.conv2d(vgg_layer7_out, num_classes, 1, padding='same', 
                                 kernel_initializer= tf.random_normal_initializer(stddev=0.01),
                                 kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
     
     # upsample
-    layer4a_in = tf.layers.conv2d_transpose(layer7_out, num_classes, 4, strides=(2, 2), padding='same', 
+    dconv_7 = tf.layers.conv2d_transpose(layer_7, num_classes, 4, strides=(2, 2), padding='same', 
                                 kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
                                 kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
     
     # 1x1 convolution of vgg layer 4
-    layer4b_in = tf.layers.conv2d(vgg_layer4_out, num_classes, 1, padding='same', 
+    layer_4 = tf.layers.conv2d(vgg_layer4_out, num_classes, 1, padding='same', 
                                 kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
                                 kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
     
     # skip connection
-    layer4a_out = tf.add(layer4a_in, layer4b_in)
+    skip_layer_4 = tf.add(dconv_7, layer_4)
     
     # upsample
-    layer3a_in = tf.layers.conv2d_transpose(layer4a_out, num_classes, 4, strides=(2, 2), padding='same', 
+    dconv_4 = tf.layers.conv2d_transpose(skip_layer_4, num_classes, 4, strides=(2, 2), padding='same', 
                                 kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
                                 kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
     
     # 1x1 convolution of vgg layer 3
-    layer3b_in = tf.layers.conv2d(vgg_layer3_out, num_classes, 1, padding='same', 
+    layer_3 = tf.layers.conv2d(vgg_layer3_out, num_classes, 1, padding='same', 
                                 kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
                                 kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
     
     # skip connection
-    layer3a_out = tf.add(layer3a_in, layer3b_in)
+    skip_layer_3 = tf.add(dconv_4, layer_3)
     
     # upsample
-    nn_last_layer = tf.layers.conv2d_transpose(layer3a_out, num_classes, 16, strides=(8, 8), padding= 'same', 
+    nn_last_layer = tf.layers.conv2d_transpose(skip_layer_3, num_classes, 16, strides=(8, 8), padding= 'same', 
                                 kernel_initializer= tf.random_normal_initializer(stddev=0.01), 
                                 kernel_regularizer= tf.contrib.layers.l2_regularizer(1e-3))
     
@@ -109,10 +109,10 @@ def optimize(nn_last_layer, correct_label, learning_rate, num_classes):
     logits = tf.reshape(nn_last_layer, (-1, num_classes))
     labels = tf.reshape(correct_label, (-1, num_classes))
     
-    # define loss function
+    # loss function
     cross_entropy_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = logits, labels = labels))
     
-    # define training operation
+    # training operation
     optimizer = tf.train.AdamOptimizer(learning_rate= learning_rate)
     train_op = optimizer.minimize(cross_entropy_loss)
 
@@ -138,8 +138,10 @@ def train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_l
     # TODO: Implement function
     sess.run(tf.global_variables_initializer())
     
+    # Start timer
     start = time.time()
     
+    # Print results
     print("Training...")
     print()
     for i in range(epochs):
@@ -153,9 +155,11 @@ def train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_l
             loss_array.append(loss)
             print("Loss: = {:.3f}".format(loss))
         
+        # Calculate average loss
         loss_sum = sum(loss_array)
         avg_loss = loss_sum / len(loss_array)
         
+        # Stop timer
         end = time.time()
         train = (end - start) / 60
         train = int(round(train))
@@ -204,7 +208,6 @@ def run():
         train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, input_image, correct_label, keep_prob, learning_rate)
 
         # TODO: Save inference data using helper.save_inference_samples
-        #  helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_prob, input_image)
         helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_prob, input_image)
 
         # OPTIONAL: Apply the trained model to a video
