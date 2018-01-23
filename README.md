@@ -68,7 +68,7 @@ Hyperparameters below:
 
 
 ### Results
-Check out samples below:
+Loss consistently dropped over the course of the 25 epochs, going from an average of 0.86 in epoch 1 to an average of 0.06 in epoch 25. Check out some sample results below:
 
 ![Sample 1](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000015.png?raw=true "Sample 1")
 ![Sample 2](https://github.com/tlapinsk/CarND-Semantic-Segmentation/blob/master/output/um_000008.png?raw=true "Sample 2")
